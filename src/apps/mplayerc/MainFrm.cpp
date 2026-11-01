@@ -314,6 +314,8 @@ BEGIN_MESSAGE_MAP(CMainFrame, CFrameWnd)
 	ON_UPDATE_COMMAND_UI(ID_VIEW_ZOOM_AUTOFIT, OnUpdateViewZoom)
 	ON_COMMAND_RANGE(ID_VIEW_VF_HALF, ID_VIEW_VF_ZOOM2, OnViewDefaultVideoFrame)
 	ON_UPDATE_COMMAND_UI_RANGE(ID_VIEW_VF_HALF, ID_VIEW_VF_ZOOM2, OnUpdateViewDefaultVideoFrame)
+	ON_COMMAND_RANGE(ID_VIEW_VF_FROMINSIDE_LARGER, ID_VIEW_VF_FROMINSIDE_LARGER, OnViewDefaultVideoFrame)
+	ON_UPDATE_COMMAND_UI_RANGE(ID_VIEW_VF_FROMINSIDE_LARGER, ID_VIEW_VF_FROMINSIDE_LARGER, OnUpdateViewDefaultVideoFrame)
 	ON_COMMAND(ID_VIEW_VF_SWITCHZOOM, OnViewSwitchVideoFrame)
 	ON_COMMAND(ID_VIEW_VF_KEEPASPECTRATIO, OnViewKeepaspectratio)
 	ON_UPDATE_COMMAND_UI(ID_VIEW_VF_KEEPASPECTRATIO, OnUpdateViewKeepaspectratio)
@@ -7761,9 +7763,18 @@ void CMainFrame::OnViewZoomAutoFit()
 	m_OSD.DisplayMessage(OSD_TOPLEFT, ResStr(IDS_OSD_ZOOM_AUTO), 3000);
 }
 
+static int VideoFrameModeFromCommand(UINT nID)
+{
+	if (nID == ID_VIEW_VF_FROMINSIDE_LARGER) {
+		return DVS_FROMINSIDE_LARGER;
+	}
+
+	return nID - ID_VIEW_VF_HALF;
+}
+
 void CMainFrame::OnViewDefaultVideoFrame(UINT nID)
 {
-	m_iVideoSize = nID - ID_VIEW_VF_HALF;
+	m_iVideoSize = VideoFrameModeFromCommand(nID);
 	m_ZoomX = m_ZoomY = 1;
 	m_PosX = m_PosY = 0.5;
 	MoveVideoWindow();
@@ -7771,7 +7782,7 @@ void CMainFrame::OnViewDefaultVideoFrame(UINT nID)
 
 void CMainFrame::OnUpdateViewDefaultVideoFrame(CCmdUI* pCmdUI)
 {
-	bool bCheck = m_iVideoSize == (pCmdUI->m_nID - ID_VIEW_VF_HALF);
+	bool bCheck = m_iVideoSize == VideoFrameModeFromCommand(pCmdUI->m_nID);
 	SetMenuRadioCheck(pCmdUI, bCheck);
 }
 
@@ -7781,6 +7792,8 @@ void CMainFrame::OnViewSwitchVideoFrame()
 	if (vs <= DVS_DOUBLE || vs == DVS_FROMOUTSIDE) {
 		vs = DVS_STRETCH;
 	} else if (vs == DVS_FROMINSIDE) {
+		vs = DVS_FROMINSIDE_LARGER;
+	} else if (vs == DVS_FROMINSIDE_LARGER) {
 		vs = DVS_ZOOM1;
 	} else if (vs == DVS_ZOOM2) {
 		vs = DVS_FROMOUTSIDE;
@@ -7793,6 +7806,9 @@ void CMainFrame::OnViewSwitchVideoFrame()
 			break;
 		case DVS_FROMINSIDE:
 			m_OSD.DisplayMessage(OSD_TOPLEFT, ResStr(IDS_TOUCH_WINDOW_FROM_INSIDE));
+			break;
+		case DVS_FROMINSIDE_LARGER:
+			m_OSD.DisplayMessage(OSD_TOPLEFT, ResStr(IDS_TOUCH_WINDOW_INSIDE_LARGER));
 			break;
 		case DVS_ZOOM1:
 			m_OSD.DisplayMessage(OSD_TOPLEFT, ResStr(IDS_ZOOM1));
@@ -11555,11 +11571,17 @@ void CMainFrame::MoveVideoWindow(bool bShowStats/* = false*/, bool bForcedSetVid
 				h = szVideo.cy * 2;
 				break;
 			case DVS_FROMINSIDE:
+			case DVS_FROMINSIDE_LARGER:
 				if (!m_bShockwaveGraph) {
 					if (wy > hx) {
 						w = (double)hx / szVideo.cy;
 					} else {
 						h = (double)wy / szVideo.cx;
+					}
+
+					if (m_iVideoSize == DVS_FROMINSIDE_LARGER && w > szVideo.cx) {
+						w = szVideo.cx;
+						h = szVideo.cy;
 					}
 
 					if (m_bFullScreen || IsD3DFullScreenMode()) {

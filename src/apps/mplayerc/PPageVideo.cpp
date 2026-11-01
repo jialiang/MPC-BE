@@ -270,6 +270,7 @@ BOOL CPPageVideo::OnInitDialog()
 	m_cbFrameMode.AddString(ResStr(IDS_FRAME_FROMOUTSIDE));
 	m_cbFrameMode.AddString(ResStr(IDS_FRAME_ZOOM1));
 	m_cbFrameMode.AddString(ResStr(IDS_FRAME_ZOOM2));
+	m_cbFrameMode.AddString(ResStr(IDS_FRAME_FROMINSIDE_LARGER));
 	m_cbFrameMode.SetCurSel(s.iDefaultVideoSize);
 
 	m_chkNoSmallUpscale.SetCheck(s.bNoSmallUpscale);
@@ -523,7 +524,8 @@ void CPPageVideo::OnSurfaceFormatChange()
 
 void CPPageVideo::OnFrameModeChange()
 {
-	if (m_cbFrameMode.GetCurSel() == ID_VIEW_VF_FROMINSIDE - ID_VIEW_VF_HALF) {
+	const int frameMode = m_cbFrameMode.GetCurSel();
+	if (frameMode == DVS_FROMINSIDE || frameMode == DVS_FROMINSIDE_LARGER) {
 		m_chkNoSmallUpscale.EnableWindow(TRUE);
 		m_chkNoSmallDownscale.EnableWindow(TRUE);
 	} else {

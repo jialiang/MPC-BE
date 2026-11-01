@@ -158,6 +158,7 @@
 #define ID_VIEW_VF_SWITCHZOOM           843
 #define ID_VIEW_VF_KEEPASPECTRATIO      844
 #define ID_VIEW_VF_COMPMONDESKARDIFF    845
+#define ID_VIEW_VF_FROMINSIDE_LARGER    846
 #define ID_ASPECTRATIO_START            850
 #define ID_ASPECTRATIO_SOURCE           850
 #define ID_ASPECTRATIO_4_3              851
@@ -1382,6 +1383,7 @@
 #define IDS_SUBTITLES_ERROR             33402
 #define IDS_AG_VIDFRM_ZOOM1             33419
 #define IDS_AG_VIDFRM_ZOOM2             33420
+#define IDS_AG_VIDFRM_INSIDE_LARGER     33421
 #define IDS_AG_VIDFRM_SWITCHZOOM        33422
 #define IDS_ENABLE_ALL_FILTERS          33423
 #define IDS_DISABLE_ALL_FILTERS         33424
@@ -1398,6 +1400,7 @@
 #define IDS_AG_REOPEN                   33435
 #define IDS_PROPERTIESFOR               33436
 #define IDS_AUDIO_ONLY                  33437
+#define IDS_TOUCH_WINDOW_INSIDE_LARGER  33438
 #define IDS_TIME_TOOLTIP_ABOVE          33440
 #define IDS_TIME_TOOLTIP_BELOW          33441
 #define IDS_VIDEO_STREAM                33442
@@ -1435,6 +1438,7 @@
 #define IDS_FRAME_ZOOM1                 33505
 #define IDS_FRAME_ZOOM2                 33506
 #define IDS_FRAME_FROMOUTSIDE           33507
+#define IDS_FRAME_FROMINSIDE_LARGER     33508
 #define IDS_CENTER_LEVEL_INC            33510
 #define IDS_CENTER_LEVEL_DEC            33511
 #define IDS_CENTER_LEVEL                33512
