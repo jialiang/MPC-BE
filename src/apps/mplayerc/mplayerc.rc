@@ -2091,6 +2091,7 @@ BEGIN
         MENUITEM "&Double Size",                ID_VIEW_VF_DOUBLE
         MENUITEM "&Stretch To Window",          ID_VIEW_VF_STRETCH
         MENUITEM "Touch Window From &Inside",   ID_VIEW_VF_FROMINSIDE
+        MENUITEM "Touch Window From Inside (&Larger Only)", ID_VIEW_VF_FROMINSIDE_LARGER
         MENUITEM "Zoom &1",                     ID_VIEW_VF_ZOOM1
         MENUITEM "Zoom &2",                     ID_VIEW_VF_ZOOM2
         MENUITEM "Touch Window From &Outside",  ID_VIEW_VF_FROMOUTSIDE
@@ -2948,6 +2949,7 @@ BEGIN
     IDS_FRAME_ZOOM1         "Zoom 1"
     IDS_FRAME_ZOOM2         "Zoom 2"
     IDS_FRAME_FROMOUTSIDE   "Touch Window From Outside"
+    IDS_FRAME_FROMINSIDE_LARGER "Touch Window From Inside (Larger Only)"
     IDS_CENTER_LEVEL_INC    "Center level increase"
     IDS_CENTER_LEVEL_DEC    "Center level decrease"
     IDS_CENTER_LEVEL        "Center level (%+.1f dB)"
@@ -3568,6 +3570,7 @@ STRINGTABLE
 BEGIN
     IDS_AG_VIDFRM_ZOOM1     "VidFrm Zoom 1"
     IDS_AG_VIDFRM_ZOOM2     "VidFrm Zoom 2"
+    IDS_AG_VIDFRM_INSIDE_LARGER "VidFrm Inside (Larger Only)"
     IDS_AG_VIDFRM_SWITCHZOOM "VidFrm Switch Zoom"
     IDS_ENABLE_ALL_FILTERS  "&Enable all filters"
 END
@@ -3618,6 +3621,7 @@ BEGIN
     IDS_ZOOM1               "Zoom 1"
     IDS_ZOOM2               "Zoom 2"
     IDS_TOUCH_WINDOW_FROM_OUTSIDE "Touch Window From Outside"
+    IDS_TOUCH_WINDOW_INSIDE_LARGER "Touch Window From Inside (Larger Only)"
     IDS_AUDIO_STREAM        "Audio %u/%u: %s"
     IDS_AG_REOPEN           "Reopen File"
     IDS_PROPERTIESFOR       "Properties for '%s'"

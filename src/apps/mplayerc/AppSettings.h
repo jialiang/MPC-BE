@@ -190,7 +190,8 @@ enum dvstype {
 	DVS_FROMINSIDE,
 	DVS_FROMOUTSIDE,
 	DVS_ZOOM1,
-	DVS_ZOOM2
+	DVS_ZOOM2,
+	DVS_FROMINSIDE_LARGER
 };
 
 enum favtype {
